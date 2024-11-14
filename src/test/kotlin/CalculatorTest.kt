@@ -1,17 +1,27 @@
+import calculator.Calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 
 class CalculatorTest {
     private val calculator = Calculator()
 
-    @Test
-    fun `연산 테스트`() {
-        val result = calculator.calculate("3 + 2 - 3 * 4 / 2")
-        assertThat(result).isEqualTo(4)
+    @ParameterizedTest
+    @CsvSource(
+        "3 + 2 - 3 * 4 / 2, 4",
+        "10 + 5 - 2 * 3 / 1, 39",
+        "8 / 2 * 4 - 3 + 1, 14",
+    )
+    fun `연산 테스트`(
+        input: String,
+        expected: Int,
+    ) {
+        val result = calculator.calculate(input)
+        assertThat(result).isEqualTo(expected)
     }
 
     @ParameterizedTest
