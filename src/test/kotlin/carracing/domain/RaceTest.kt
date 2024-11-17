@@ -12,7 +12,7 @@ class RaceTest : StringSpec({
 
     "race should move all cars when threshold is always satisfied" {
         val randomGenerator = RandomGenerator { 5 }
-        val cars = List(numberOfCars) { Car(threshold) }
+        val cars = List(numberOfCars) { Car("car$it", threshold) }
         val race = Race(cars, numberOfAttempts, randomGenerator)
 
         race.start()
@@ -24,7 +24,7 @@ class RaceTest : StringSpec({
 
     "race should not move any car when threshold is never satisfied" {
         val randomGenerator = RandomGenerator { 3 }
-        val cars = List(numberOfCars) { Car(threshold) }
+        val cars = List(numberOfCars) { Car("car$it", threshold) }
         val race = Race(cars, numberOfAttempts, randomGenerator)
 
         race.start()
@@ -37,7 +37,7 @@ class RaceTest : StringSpec({
     "race should respect the random generator and threshold logic" {
         val randomValues = mutableListOf(4, 5, 3, 6, 2, 4, 5, 3, 6, 2, 4, 5, 3, 6, 2)
         val randomGenerator = RandomGenerator { randomValues.removeFirst() }
-        val cars = List(numberOfCars) { Car(threshold) }
+        val cars = List(numberOfCars) { Car("car$it", threshold) }
         val race = Race(cars, numberOfAttempts, randomGenerator)
 
         race.start()

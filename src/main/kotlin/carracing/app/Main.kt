@@ -9,12 +9,12 @@ import carracing.ui.ResultView
 import kotlin.random.Random
 
 fun main() {
-    val numberOfCars = InputView.getCarNames()
+    val carNames = InputView.getCarNames()
     val numberOfAttempts = InputView.getNumberOfAttempts()
     val threshold = Threshold { it >= 4 }
     val randomGenerator = RandomGenerator { Random.nextInt(0, 10) }
-
-    val race = Race(List(numberOfCars.size) { Car(threshold) }, numberOfAttempts, randomGenerator)
+    val cars = carNames.map { Car(it, threshold) }
+    val race = Race(cars, numberOfAttempts, randomGenerator)
 
     ResultView.printStartMessage()
     race.start()
