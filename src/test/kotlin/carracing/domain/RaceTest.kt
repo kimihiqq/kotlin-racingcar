@@ -3,6 +3,7 @@ package carracing.domain
 import carracing.strategy.RandomGenerator
 import carracing.strategy.Threshold
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
 class RaceTest : StringSpec({
@@ -45,5 +46,20 @@ class RaceTest : StringSpec({
         cars.forEach { car ->
             car.position shouldBe 3
         }
+    }
+
+    "should find the winners correctly" {
+        val alwaysMoveThreshold = Threshold { true }
+        val cars =
+            listOf(
+                Car("pobi", alwaysMoveThreshold).apply { repeat(5) { move(5) } },
+                Car("crong", alwaysMoveThreshold).apply { repeat(3) { move(5) } },
+                Car("honux", alwaysMoveThreshold).apply { repeat(5) { move(5) } },
+            )
+
+        val race = Race(cars, attempts = 5) { 5 }
+        val winners = race.findWinners()
+
+        winners.map { it.name } shouldContainExactly listOf("pobi", "honux")
     }
 })
