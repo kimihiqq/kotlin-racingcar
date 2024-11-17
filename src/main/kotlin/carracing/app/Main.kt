@@ -18,4 +18,5 @@ fun main() {
 
     ResultView.printStartMessage()
     race.start()
+    ResultView.printWinners(race.findWinners())
 }
