@@ -1,5 +1,5 @@
 package carracing.strategy
 
-interface RandomGenerator {
+fun interface RandomGenerator {
     fun generate(): Int
 }

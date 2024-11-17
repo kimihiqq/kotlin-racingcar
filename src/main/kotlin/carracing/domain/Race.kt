@@ -12,7 +12,7 @@ class Race(
         repeat(attempts) {
             cars.forEach { car ->
                 val randomValue = randomGenerator.generate()
-                (randomValue >= 4).let { if (it) car.move() }
+                car.move(randomValue)
             }
             ResultView.printCurrentPosition(cars)
         }
