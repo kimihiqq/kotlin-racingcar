@@ -1,7 +1,7 @@
 package carracing.domain
 
 import carracing.strategy.RandomGenerator
-import carracing.ui.ResultView
+import carracing.view.ResultView
 
 class Race(
     private val cars: List<Car>,

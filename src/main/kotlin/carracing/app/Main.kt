@@ -4,8 +4,8 @@ import carracing.domain.Car
 import carracing.domain.Race
 import carracing.strategy.RandomGenerator
 import carracing.strategy.Threshold
-import carracing.ui.InputView
-import carracing.ui.ResultView
+import carracing.view.InputView
+import carracing.view.ResultView
 import kotlin.random.Random
 
 fun main() {
