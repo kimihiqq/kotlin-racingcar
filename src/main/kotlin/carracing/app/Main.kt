@@ -2,15 +2,21 @@ package carracing.app
 
 import carracing.domain.Car
 import carracing.domain.Race
-import carracing.strategy.DefaultRandomGenerator
+import carracing.strategy.RandomGenerator
+import carracing.strategy.Threshold
 import carracing.ui.InputView
 import carracing.ui.ResultView
+import kotlin.random.Random
 
 fun main() {
-    val numberOfCars = InputView.getNumberOfCars()
+    val carNames = InputView.getCarNames()
     val numberOfAttempts = InputView.getNumberOfAttempts()
-    val race = Race(List(numberOfCars) { Car() }, numberOfAttempts, DefaultRandomGenerator())
+    val threshold = Threshold { it >= 4 }
+    val randomGenerator = RandomGenerator { Random.nextInt(0, 10) }
+    val cars = carNames.map { Car(it, threshold) }
+    val race = Race(cars, numberOfAttempts, randomGenerator)
 
     ResultView.printStartMessage()
     race.start()
+    ResultView.printWinners(race.findWinners())
 }
