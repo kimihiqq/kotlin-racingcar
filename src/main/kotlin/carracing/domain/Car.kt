@@ -1,6 +1,6 @@
 package carracing.domain
 
-import carracing.strategy.Threshold
+import carracing.dto.CarDTO
 
 class Car(
     val name: String,
@@ -20,5 +20,9 @@ class Car(
         if (threshold.isSatisfied(value)) {
             position++
         }
+    }
+
+    fun toDTO(): CarDTO {
+        return CarDTO(name, position)
     }
 }

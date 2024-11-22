@@ -1,7 +1,5 @@
 package carracing.domain
 
-import carracing.strategy.RandomGenerator
-import carracing.strategy.Threshold
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
