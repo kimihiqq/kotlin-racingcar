@@ -1,21 +1,24 @@
 package carracing.domain
 
-import carracing.dto.CarDTO
+import carracing.dto.RaceResult
+import carracing.dto.RoundResult
 
 class Race(
     private val cars: List<Car>,
     private val attempts: Int,
     private val randomGenerator: RandomGenerator,
 ) {
-    fun start(): List<List<CarDTO>> {
-        val allRounds = mutableListOf<List<CarDTO>>()
+    fun start(): RaceResult {
+        val allRounds =
+            buildList {
+                repeat(attempts) {
+                    moveCars()
+                    add(RoundResult(cars.map { it.toDto() }))
+                }
+            }
 
-        repeat(attempts) {
-            moveCars()
-            allRounds.add(cars.map { it.toDTO() })
-        }
-
-        return allRounds
+        val winners = findWinners().map { it.toDto() }
+        return RaceResult(allRounds, winners)
     }
 
     private fun moveCars() {

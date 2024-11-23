@@ -18,7 +18,6 @@ fun main() {
 
     ResultView.printStartMessage()
 
-    val allRounds = race.start()
-    val winners = race.findWinners().map { it.toDTO() }
-    ResultView.printResults(allRounds, winners)
+    val raceResult = race.start()
+    ResultView.printResults(raceResult)
 }

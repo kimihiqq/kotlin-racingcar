@@ -1,6 +1,6 @@
 package carracing.domain
 
-import carracing.dto.CarDTO
+import carracing.dto.CarDto
 
 class Car(
     val name: String,
@@ -22,7 +22,7 @@ class Car(
         }
     }
 
-    fun toDTO(): CarDTO {
-        return CarDTO(name, position)
+    fun toDto(): CarDto {
+        return CarDto(name, position)
     }
 }
